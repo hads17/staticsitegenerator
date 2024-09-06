@@ -10,7 +10,8 @@ def main():
     print(html_node)
     print(html_node.props_to_html())
     
-    leaf_node = LeafNode('a', 'This is an anchor', {"href":"https:www.google.com", "target":"_blank"})
-    print(leaf_node)
+    leaf_node = LeafNode('a', 'This is an Anchor', {"href":"https:www.google.com", "target":"_blank"})
+    
+    print(leaf_node.to_html())
 
 main()
