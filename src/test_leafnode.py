@@ -15,3 +15,7 @@ class test_LeafNode(unittest.TestCase):
         leaf_node = LeafNode('a', 'this is an anchor', {'href':'https://www.bootdev.com','target':'_blank'})
         test_string = '<a href="https://www.bootdev.com" target="_blank">this is an anchor</a>'
         self.assertEqual(leaf_node.to_html(), test_string)
+
+    if __name__ == "__main__":
+        unittest.main()
+
