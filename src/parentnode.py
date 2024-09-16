@@ -23,10 +23,8 @@ class ParentNode(HTMLNode):
         for child in self.children:
             if child.children is not None:
                 html_string += child.to_html()
-                print(html_string)
+                print(f'parentnode found: {child}')
             else:
+                print(f'leafnode found: {child}')
                 html_string += child.to_html()
-                print(html_string)
-
-        
-
+        return html_string + f'</{self.tag}>'

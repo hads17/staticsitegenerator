@@ -16,7 +16,7 @@ def main():
     #print(leaf_node.to_html())
     
     node = ParentNode(
-    "p",
+    "div",
     [
         LeafNode("b", "Bold text"),
         ParentNode("div", [LeafNode("b", "Test Parent Node")]),
@@ -26,5 +26,5 @@ def main():
     ]
     )
 
-    node.to_html()
+    print(node.to_html())
 main()
