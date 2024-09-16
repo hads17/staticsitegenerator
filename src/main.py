@@ -2,9 +2,10 @@ from textnode import TextNode
 from htmlnode import HTMLNode
 from leafnode import LeafNode
 from parentnode import ParentNode
+from tools import *
 
 def main():
-    text_node = TextNode('This is a text node', 'bold', 'https://www.boot.dev')
+    text_node = TextNode('This is a text node', 'link', 'https://www.boot.dev')
     #print(text_node)
 
     html_node = HTMLNode('p', 'This is a paragraph', [], {"href":"https://www.boot.dev", "target":"_blank"})
@@ -26,5 +27,7 @@ def main():
     ]
     )
 
-    print(node.to_html())
+    #print(node.to_html())
+
+    print(text_node.text_node_to_html_node().to_html()) 
 main()
