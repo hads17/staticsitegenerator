@@ -12,8 +12,8 @@ class LeafNode(HTMLNode):
             raise ValueError("Value is required")
         if self.tag is None:
             return self.value
-        else:
+        elif self.props is not None:
             return f'<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>'
-
+        else: return f'<{self.tag}>{self.value}</{self.tag}>'
     def __repr__(self):
         return f'LeafNode({self.tag}, {self.value}, {self.props})'

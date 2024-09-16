@@ -7,10 +7,26 @@ class ParentNode(HTMLNode):
         self.children = children
         self.props = props
 
+    def __repr__(self):
+        return f'ParentNode({self.tag}, {self.children}, {self.props})'
+
     def to_html(self):
-        if tag is None:
+        if self.tag is None:
             raise ValueError('Tag is a required parameter')
-        if children is None:
+        if self.children is None:
             raise ValueError('Children is a required parameter')
+        html_string = ''
+        if self.props is not None:
+            html_string += f'<{self.tag}{self.props_to_html()}>'
+        else:
+            html_string += f'<{self.tag}>'
+        for child in self.children:
+            if child.children is not None:
+                html_string += child.to_html()
+                print(html_string)
+            else:
+                html_string += child.to_html()
+                print(html_string)
+
         
-        
+
