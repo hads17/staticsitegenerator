@@ -29,5 +29,10 @@ def main():
 
     #print(node.to_html())
 
-    print(text_node.text_node_to_html_node().to_html()) 
+    #print(text_node.text_node_to_html_node().to_html()) 
+    node_list = []
+    text_node2 = TextNode('This *is* text **with** a `code block``code block2` `code block3` words', 'text')
+    node_list.append(text_node2)
+    new_node_list = split_nodes_delimiter(node_list, '`', 'code')
+    split_nodes_delimiter(node_list, '*', 'bold')
 main()
