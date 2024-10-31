@@ -21,6 +21,16 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                     result.append(TextNode(temp_array[i], TextType.TEXT))
     return result
 
+def split_nodes_image(old_nodes):
+    result = []
+    for node in old_nodes:
+        if node.text_type != TextType.TEXT:
+            result.append(node)
+        else:
+            extract_markdown_images(node.text)
+def split_nodes_link(old_nodes):
+    pass
+
 def extract_markdown_images(text):
     result = []
     result = re.findall(r"!\[(.*?)\]\((.*?)\)", text)
