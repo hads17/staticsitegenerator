@@ -1,19 +1,20 @@
 #Contains misc functions to ultilize in this project
 from textnode import TextNode
+from constants import *
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    new_list = []
+    result = []
     for node in old_nodes:
-        temp_list = []
-        temp_list = node.text.split(f"{delimiter}")
-        for n in range(0, len(temp_list)):
-            #print(temp_list[n])
-            split_node = None
-            if (n % 2 != 0):
-                split_node = TextNode(temp_list[n], text_type)
-                new_list.append(split_node)
-            elif temp_list[n] != "":
-                split_node = TextNode(temp_list[n], 'text')
-                new_list.append(split_node)
-    print(new_list)
-    return new_list
+        if node.text_type != TextType.TEXT:
+            result.append(node)
+        else:
+            temp_array = []
+            temp_array = node.text.split(delimiter)
+            if (len(temp_array) % 2 == 0):
+                raise ValueError("Invalid Markdown Syntax")
+            for i in range(len(temp_array)):
+                if (i % 2 != 0):
+                    result.append(TextNode(temp_array[i], text_type))
+                elif (temp_array[i] != ''):
+                    result.append(TextNode(temp_array[i], TextType.TEXT))
+    return result

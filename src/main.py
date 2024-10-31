@@ -3,9 +3,10 @@ from htmlnode import HTMLNode
 from leafnode import LeafNode
 from parentnode import ParentNode
 from tools import *
+from constants import *
 
 def main():
-    text_node = TextNode('This is a text node', 'link', 'https://www.boot.dev')
+    text_node = TextNode('This *has valid markup*', TextType.TEXT)
     #print(text_node)
 
     html_node = HTMLNode('p', 'This is a paragraph', [], {"href":"https://www.boot.dev", "target":"_blank"})
@@ -31,8 +32,11 @@ def main():
 
     #print(text_node.text_node_to_html_node().to_html()) 
     node_list = []
-    text_node2 = TextNode('This *is* text **with** a `code block``code block2` `code block3` words', 'text')
+    text_node2 = TextNode('`This` is text with a `code block` woot', 'text')
     node_list.append(text_node2)
-    new_node_list = split_nodes_delimiter(node_list, '`', 'code')
-    split_nodes_delimiter(node_list, '*', 'bold')
+    node_list.append(text_node)
+    new_node_list = split_nodes_delimiter(node_list, '*', TextType.ITALIC)
+    print(new_node_list)
+    for n in new_node_list:
+        print(n.text_node_to_html_node().to_html())
 main()
