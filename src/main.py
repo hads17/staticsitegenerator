@@ -39,4 +39,11 @@ def main():
     print(new_node_list)
     for n in new_node_list:
         print(n.text_node_to_html_node().to_html())
+    text = text = "This is text with a [rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+
+    test_extract_images = extract_markdown_images(text)
+    test_extract_links = extract_markdown_links(text)
+
+    print(test_extract_images)
+    print(test_extract_links)
 main()
