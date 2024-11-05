@@ -24,10 +24,15 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 def split_nodes_image(old_nodes):
     result = []
     for node in old_nodes:
-        if node.text_type != TextType.TEXT:
+        extracted_images = extract_markdown_images(node.text)
+        temp_array = []
+        if extracted_images == []:
             result.append(node)
         else:
-            extract_markdown_images(node.text)
+            for i in range(0,len(extracted_images)):
+                node.text.split(f'![{extracted_images[i][0]}]({extracted_images[i][1]})')
+
+
 def split_nodes_link(old_nodes):
     pass
 
