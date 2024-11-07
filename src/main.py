@@ -36,9 +36,9 @@ def main():
     node_list.append(text_node2)
     node_list.append(text_node)
     new_node_list = split_nodes_delimiter(node_list, '*', TextType.ITALIC)
-    print(new_node_list)
-    for n in new_node_list:
-        print(n.text_node_to_html_node().to_html())
+    #print(new_node_list)
+    #for n in new_node_list:
+    #    print(n.text_node_to_html_node().to_html())
     text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
     text_node3 = TextNode(text, TextType.TEXT)
     old_node_array = []

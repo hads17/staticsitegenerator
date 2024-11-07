@@ -30,7 +30,11 @@ def split_nodes_image(old_nodes):
             result.append(node)
         else:
             for i in range(0,len(extracted_images)):
-                node.text.split(f'![{extracted_images[i][0]}]({extracted_images[i][1]})')
+                sections = node.text.split(f'![{extracted_images[i][0]}]({extracted_images[i][1]})',1)
+                temp_array.extend(sections)
+                temp_array.append(TextNode(extracted_images[i][0], TextType.IMAGE, extracted_images[i][1]))
+                print(temp_array)
+
 
 
 def split_nodes_link(old_nodes):
