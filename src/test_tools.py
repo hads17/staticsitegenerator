@@ -41,6 +41,11 @@ class testTools(unittest.TestCase):
         expected_value = [TextNode("This is text with a ", TextType.TEXT), TextNode("rick roll", TextType.URL, "https://i.imgur.com/aKaOqIh.gif"), TextNode(" and ", TextType.TEXT), TextNode("obi wan", TextType.URL, "https://i.imgur.com/fJRm4Vk.jpeg"), TextNode("This is another test ", TextType.TEXT), TextNode("additional test", TextType.URL, "https://testurl.com"), TextNode("This is just a string", TextType.TEXT)]
         self.assertEqual(split_nodes_link(textnodearray), expected_value)
 
+    def test_text_to_textnodes(self):
+        text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        expected_value = [TextNode("This is ", TextType.TEXT), TextNode("text", TextType.BOLD), TextNode(" with an ", TextType.TEXT), TextNode("italic", TextType.ITALIC), TextNode(" word and a ", TextType.TEXT),TextNode("code block", TextType.CODE),TextNode(" and an ", TextType.TEXT),TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),TextNode(" and a ", TextType.TEXT),TextNode("link", TextType.URL, "https://boot.dev")]   
+        self.assertEqual(text_to_textnodes(text), expected_value)
+
     if __name__  == "__main__":
         unittest.main()
 
