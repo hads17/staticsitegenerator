@@ -24,21 +24,44 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 def split_nodes_image(old_nodes):
     result = []
     for node in old_nodes:
-        extracted_images = extract_markdown_images(node.text)
-        temp_array = []
+        nodetext = node.text
+        extracted_images = extract_markdown_images(nodetext)
         if extracted_images == []:
             result.append(node)
         else:
-            for i in range(0,len(extracted_images)):
-                sections = node.text.split(f'![{extracted_images[i][0]}]({extracted_images[i][1]})',1)
-                temp_array.extend(sections)
-                temp_array.append(TextNode(extracted_images[i][0], TextType.IMAGE, extracted_images[i][1]))
-                print(temp_array)
-
-
+            for image in extracted_images:
+                temp_array = []
+                section = nodetext.split(f'![{image[0]}]({image[1]})',1)
+                if section[0] != '':
+                    temp_array.append(TextNode(section[0], TextType.TEXT))
+                temp_array.append(TextNode(image[0], TextType.IMAGE, image[1]))
+                nodetext = nodetext.replace(section[0],'')
+                nodetext = nodetext.replace(f'![{image[0]}]({image[1]})','')
+                result.extend(temp_array)
+            if nodetext != '':
+                result.append(TextNode(nodetext, TextType.TEXT))
+    return result
 
 def split_nodes_link(old_nodes):
-    pass
+    result = []
+    for node in old_nodes:
+        nodetext = node.text
+        extracted_links = extract_markdown_links(nodetext)
+        if extracted_links == []:
+            result.append(node)
+        else:
+            for link in extracted_links:
+                temp_array = []
+                section = nodetext.split(f'[{link[0]}]({link[1]})',1)
+                if section[0] != '':
+                    temp_array.append(TextNode(section[0], TextType.TEXT))
+                temp_array.append(TextNode(link[0], TextType.URL, link[1]))
+                nodetext = nodetext.replace(section[0],'')
+                nodetext = nodetext.replace(f'[{link[0]}]({link[1]})','')
+                result.extend(temp_array)   
+            if nodetext != '':
+                result.append(TextNode(nodetext, TextType.TEXT))
+    return result
 
 def extract_markdown_images(text):
     result = []
