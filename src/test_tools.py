@@ -46,6 +46,11 @@ class testTools(unittest.TestCase):
         expected_value = [TextNode("This is ", TextType.TEXT), TextNode("text", TextType.BOLD), TextNode(" with an ", TextType.TEXT), TextNode("italic", TextType.ITALIC), TextNode(" word and a ", TextType.TEXT),TextNode("code block", TextType.CODE),TextNode(" and an ", TextType.TEXT),TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),TextNode(" and a ", TextType.TEXT),TextNode("link", TextType.URL, "https://boot.dev")]   
         self.assertEqual(text_to_textnodes(text), expected_value)
 
+    def test_markdown_to_blocks(self):
+        array = markdown_to_blocks("# This is a heading\n\n\n           This is a paragraph of text. It has some **bold** and *italic* words inside of it.\n\n* This is the first list item in a list block\n* This is a list item\n* This is another list item")
+        expected_value = ["# This is a heading", "This is a paragraph of text. It has some **bold** and *italic* words inside of it.", "* This is the first list item in a list block\n* This is a list item\n* This is another list item"]
+        self.assertEqual(array, expected_value)
+    
     if __name__  == "__main__":
         unittest.main()
 
