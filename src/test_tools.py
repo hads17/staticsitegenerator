@@ -51,6 +51,23 @@ class testTools(unittest.TestCase):
         expected_value = ["# This is a heading", "This is a paragraph of text. It has some **bold** and *italic* words inside of it.", "* This is the first list item in a list block\n* This is a list item\n* This is another list item"]
         self.assertEqual(array, expected_value)
     
+    def test_block_to_block_type(self):
+        text1 = "1 this is a sample heading"
+        text2 = "12 this is a sample of a paragraph"
+        text3 = "```this is a sample of code```"
+        text4 = ">this is a sample quote"
+        text5 = "* this is a sample unordered list\n* I am super unordered\n* more unordered list!"
+        text6 = "1. this is a sample ordered list\n2. I am ordered\n3. Order up!"
+        text7 = "1. this is a sample of a bad ordered list\n3. This should be a paragraph type now\n2. uh oh!"
+
+        self.assertEqual(block_to_block_type(text1), BlockType.HEADING)
+        self.assertEqual(block_to_block_type(text2), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(text3), BlockType.CODE)
+        self.assertEqual(block_to_block_type(text4), BlockType.QUOTE)
+        self.assertEqual(block_to_block_type(text5), BlockType.UNORDERED_LIST)
+        self.assertEqual(block_to_block_type(text6), BlockType.ORDERED_LIST)
+        self.assertEqual(block_to_block_type(text7), BlockType.PARAGRAPH)
+
     if __name__  == "__main__":
         unittest.main()
 

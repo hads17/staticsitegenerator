@@ -89,3 +89,39 @@ def markdown_to_blocks(markdown):
     for b in blocks:
         result.append(b.strip("\n").strip())
     return result
+
+def block_to_block_type(markdown):
+    result = ''
+    if (
+        markdown.startswith('1 ') or 
+        markdown.startswith('2 ') or 
+        markdown.startswith('3 ') or 
+        markdown.startswith('4 ') or 
+        markdown.startswith('5 ') or 
+        markdown.startswith('6 ')
+        ):
+        result = BlockType.HEADING
+    elif markdown.startswith('```') and markdown.endswith('```'):
+        result = BlockType.CODE
+    elif markdown.startswith('>'):
+        result = BlockType.QUOTE
+    elif (
+        markdown.startswith('* ') or 
+        markdown.startswith('- ')
+        ):
+        result = BlockType.UNORDERED_LIST
+    elif markdown.startswith('1. '):
+        lines = markdown.split('\n')
+        line_number = 0
+        fail_flag = 0
+        for l in lines:
+            if l.startswith(f'{line_number + 1}. '):
+                result = BlockType.ORDERED_LIST
+                line_number += 1
+            else:
+                fail_flag = 1
+        if fail_flag == 1:
+            result = BlockType.PARAGRAPH
+    else:
+        result = BlockType.PARAGRAPH
+    return result
