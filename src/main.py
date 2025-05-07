@@ -3,28 +3,11 @@ from modules.htmlnode import *
 from modules.utilities import *
 
 def main(): 
-    textnode = TextNode('this is a test TextNode', TextType.IMAGE, 'www.google.com')
-    print(textnode)
-    print(text_node_to_html_node(textnode).to_html())
-
-    #htmlnode = HtmlNode("a", "This is a link to google", None, {'href':'https://www.google.com', 'target':'_blank'})
-    #print(htmlnode.props_to_html())
-    #print(htmlnode)
-
-    #leafnode = LeafNode("a", "This is a link to google", None, {'href':'https://www.google.com', 'target':'_blank'})
-    #print(leafnode.to_html())
-
-    #parentnode = ParentNode(
-    #"p",
-    #[
-    #    LeafNode("b", "Bold text"),
-    #    LeafNode(None, "Normal text"),
-    #    LeafNode("i", "italic text"),
-    #    LeafNode(None, "Normal text"),
-    #],
-    #)
-
-    #print(parentnode.to_html())
+    node = TextNode(
+        "![google](https://google.com) This is text with an [image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)       trailing text",
+        TextType.TEXT,
+    )
+    new_nodes = split_nodes_image([node])
 
 
 
