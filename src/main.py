@@ -1,10 +1,11 @@
 from modules.textnode import *
 from modules.htmlnode import *
-from modules.utilities import *
+from modules.text_utilities import *
+from modules.block_utilities import *
 
 def main(): 
-    text = 'This is **text** with an _italic word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)'
-    print(text_to_textnodes(text))
+    md="1. This is an unordered List\n2. More unorder\n4. wrong order"
+    print(block_to_block_type(md))
 
 
 
