@@ -13,7 +13,8 @@ def markdown_to_blocks(markdown):
     split_strings = markdown.split("\n\n")
     result = []
     for string in split_strings:
-        result.append(string.strip("\n "))
+        if string:
+            result.append(string.strip("\n "))
     return result
 
 def block_to_block_type(block):

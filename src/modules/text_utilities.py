@@ -5,6 +5,7 @@ import re
 #This converts already split and processed text nodes and turns them into HTML nodes.
 
 def text_node_to_html_node(text_node):
+    #text_node.text = text_node.text.strip('\n')
     if text_node.text_type == TextType.TEXT:
         return LeafNode(None, text_node.text)
     if text_node.text_type == TextType.BOLD:
@@ -107,7 +108,7 @@ def split_nodes_link(old_nodes):
                 result.append(TextNode(remaining_text, TextType.TEXT))
     return result
 
-#Takes Raw Markdown and converts to Text
+#Takes Raw Markdown and converts to Text Nodes
 
 def text_to_textnodes(text):
     split_nodes = []
