@@ -6,33 +6,43 @@ def copy_static_files_to_public(filepath):
         shutil.rmtree(filepath)
     os.mkdir(filepath)
     static_path = os.path.join(os.getcwd(), "static")
-    static_files = get_files(static_path)
-    static_folders = get_folders(static_path)
-    #print('files: ', static_files)
-    print('folders: ', static_folders)
+    folders = get_folders(static_path)
+    print('folders: ', folders)
+    create_folder_structure(folders)
+    #print(get_files(static_path))
 
-def get_folders(filepath):
-    result = []
-    print("current FilePath: ", filepath)
-    if get_filecount(filepath) == 0:
-        result.append(filepath)
-        print("zero count: ", result)
-        return result
-    subfolders = []
-    #List out Directories and Files in provided filepath
-    dir_list = os.listdir(filepath)
-    print(dir_list)
-    if dir_list:
+
+def create_folder_structure(folders):
+    if not folders:
+        raise ValueError("No Folders provided")
+    for folder in folders:
+        os.mkdir(folder)
+
+def create_files(files):
+    pass
+
+def get_folders(filepath, root=None):
+    if root:
+        new_public_path = root
+    else:
+        new_public_path = os.path.join(os.getcwd(), "public")
+    folders = []
+    if get_foldercount(filepath) > 0:
+        dir_list = os.listdir(filepath)
         for dir in dir_list:
-            path = os.path.join(filepath, dir)
-            if os.path.isdir(path):
-                result.append(path)
-                subfolders.extend(get_folders(path))
-    if subfolders:
-        result.extend(subfolders)
-    return result
+            dir_public_path = os.path.join(new_public_path, dir)
+            dir_path = os.path.join(filepath, dir)
+            if os.path.isdir(dir_path):
+                subfolders = []
+                subfolders = get_folders(dir_path, dir_public_path)
+                if subfolders:
+                    folders.append(dir_public_path)
+                    folders.extend(subfolders)
+                else:
+                    folders.append(dir_public_path)
+    return folders
 
-def get_filecount(filepath):
+def get_foldercount(filepath):
     count = 0
     dir_list = os.listdir(filepath)
     if not dir_list:
